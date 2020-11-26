@@ -1,0 +1,22 @@
+{
+  "name": "virtual-assistant-server-side",
+  "version": "1.0.0",
+  "description": "Server side for virtual-assistant",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ParthoKR/virtual-assistant-server-side.git"
+  },
+  "author": "Partho KR",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ParthoKR/virtual-assistant-server-side/issues"
+  },
+  "homepage": "https://github.com/ParthoKR/virtual-assistant-server-side#readme",
+  "dependencies": {
+    "mysql": "^2.18.1"
+  }
+}
