@@ -35,7 +35,7 @@ app.post('/signup', (req, res) => {
         password,
         "activated": false
     }
-    db.query("SELECT * FROM user_info WHERE username=?", [username], (err, users) => {
+    db.query("SELECT * FROM user_info WHERE username=? OR email=?", [username, email], (err, users) => {
         if(users.length==0)
         {
             bcrypt.genSalt(10, function (err, salt) {
