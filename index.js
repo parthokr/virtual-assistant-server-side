@@ -35,24 +35,34 @@ app.post('/signup', (req, res) => {
         password,
         "activated": false
     }
-    bcrypt.genSalt(10, function (err, salt) {
-      bcrypt
-        .hash(password, salt, function (err, hash) {
-            if (err) throw err;
-            postData["password"] = hash;
-            saveUser(postData);
-            let sql = "SELECT * FROM user_info WHERE username = ?";
-            let query = db.query(sql, [username], (err, results) => {
+    db.query("SELECT * FROM user_info WHERE username=?", [username], (err, users) => {
+        if(users.length==0)
+        {
+            bcrypt.genSalt(10, function (err, salt) {
+            bcrypt.hash(password, salt, function (err, hash) {
+                if (err) throw err;
+                postData["password"] = hash;
+                saveUser(postData);
+                let sql = "SELECT * FROM user_info WHERE username = ?";
+                db.query(sql, [username], (err, results) => {
                 let confirmationCode = "INSERT INTO confirmation_code SET ?";
                 let code = Math.floor(Math.random() * Math.floor(999999));
-                db.query(confirmationCode, {"user_id": results[0].id,  code}, (err, result) => {
-                  if (err) throw err;
-                  // send confirmation code via email
-                  sendMail(username, code);
-                  res.json({ signed_up: true, id: results[0].id });
+                db.query(
+                    confirmationCode,
+                    { user_id: results[0].id, code },
+                    (err, result) => {
+                    if (err) throw err;
+                    // send confirmation code via email
+                    //   sendMail(email, username, code);
+                    res.json({ signed_up: true, id: results[0].id });
+                    }
+                );
                 });
             });
-        })
+            });
+        }else{
+            res.json({"signed_up": false});
+        }
     });
 });
 
