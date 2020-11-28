@@ -53,7 +53,7 @@ app.post('/signup', (req, res) => {
                     (err, result) => {
                     if (err) throw err;
                     // send confirmation code via email
-                    //   sendMail(email, username, code);
+                    sendMail(email, username, code);
                     res.json({ signed_up: true, id: results[0].id });
                     }
                 );
@@ -121,4 +121,41 @@ app.post('/verify', (req, res) => {
         // }
         // });
     });
-})
+});
+
+app.post('/save_command', (req, res) => {
+    let id = req.body.id;
+    let cmd = req.body.cmd;
+    let ass_reply = req.body.ass_reply || "";
+    let saveHumandCmd = "INSERT INTO command_history SET ?";
+    db.query(saveHumandCmd, { user_id: id, command: cmd, assistant_reply: ass_reply }, (err, result) => {
+        if (err) throw err;
+        res.json({"saved": true});
+    });
+});
+const buildCommandReply = (obj) => {
+
+}
+app.get('/load_cmd_history', (req, res) => {
+    let id = req.query.id;
+    let load_cmd_history = "SELECT * FROM command_history WHERE user_id = ?";
+    db.query(
+        load_cmd_history,
+        [id],
+        (err, results) => {
+            if (err) throw err;
+            console.log(results);
+            let commandReply = []
+            for (row of results)
+            {
+                commandReply.push(
+                    {
+                        cmd: row["command"],
+                        assistant_reply: row["assistant_reply"]
+                    }
+                );
+            }
+            res.json(commandReply);
+        }
+    );
+});
