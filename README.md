@@ -10,6 +10,7 @@
 * `cd virtual-assistant-server-side`
 * `touch config.js`
 > Flesh out `config.js` as per your info, here is an example
+
     ``
     const config = {
     service: "gmail",
