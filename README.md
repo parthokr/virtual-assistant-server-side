@@ -11,7 +11,7 @@
 * `touch config.js`
 > Flesh out `config.js` as per your info, here is an example
 
-    ``
+    
     const config = {
     service: "gmail",
     auth: {
@@ -22,7 +22,7 @@
     module.exports = {
         config
     }
-    `` 
+    
 * Execute `virtual-assistant.sql` from the root directory onto your database
 * Now on terminal enter `node index`
 * Bingo! You are all set up to go!
