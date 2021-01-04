@@ -18,7 +18,6 @@
         pass: "yourpassword",
     },
     };
-
     module.exports = {
         config
     }
