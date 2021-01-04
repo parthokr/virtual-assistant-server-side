@@ -24,5 +24,7 @@
     }
     
 * Execute `virtual-assistant.sql` from the root directory onto your database
-* Now on terminal enter `node index`
+* Now on terminal enter `node index` and hit return
 * Bingo! You are all set up to go!
+
+**NB:** If your database host, username and password are other than *localhost*, *root* and **NULL* password, update these credentials at `index.js` at root directory
