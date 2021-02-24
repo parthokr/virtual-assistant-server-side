@@ -1,4 +1,19 @@
-const {config} = require('./config');
+/*
+    * create config.json in root directory
+   * add the following code and flesh out as per your info
+                const config = {
+                service: "gmail",
+                auth: {
+                  user: "john.doe@gmail.com",
+                  pass: "yourpasswordhere",
+                },
+              };
+
+              module.exports = {
+                  config
+              }
+*/
+const { config } = require('./config');
 const nodemailer = require("nodemailer");
 const ejs = require("ejs");
 const sendMail = (email, username, code) => {
